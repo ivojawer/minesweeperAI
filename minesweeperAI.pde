@@ -1,58 +1,60 @@
 //expert: 24x24 99mines
 
-float xCells = 24;
-float yCells = 24;
-int cantMines = 99;
+int xCells = 6;
+int yCells = 6;
+int cantMines = 5;
 
-ArrayList<Cell> cells;
+//ArrayList<Cell> cells;
+Cell[][] cells= new Cell[xCells][yCells];
+public boolean lost = false;
 void setup() {
   //noStroke();
-
-
-  background(255);
   cells = createCells();
+  cells[3][3].uncover();
+  background(255);
 }
 
 void settings() {
   int y = int(yCells*cellSize);
   int w = int(xCells*cellSize); // null pointer exception
-  size(w, y);
+  size(y, w);
 }
 
 
 void draw() {
+  background(255);
   showCells();
 }
 
+
+
 void showCells() {
-  for (Cell myCell : cells) {
-    myCell.show();
+  for (int i = 0; i < xCells; i++) {    
+    for (int j = 0; j < yCells; j++) {
+      cells[i][j].show();
+    }
   }
 }
 
-ArrayList<Cell> createCells() {
-  ArrayList<Cell> cells= new ArrayList();
-  for (float i = 0; i < xCells; i++) {
-    for (float j = 0; j < yCells; j++) {
-
-      cells.add(new Cell(i, j));
+Cell[][] createCells() {
+  Cell[][] cells= new Cell[xCells][yCells];
+  for (int i = 0; i < xCells; i++) {    
+    for (int j = 0; j < yCells; j++) {
+      cells[i][j] = new RegularCell(i, j);
     }
   }
-
-  
-  return generateBombs(cells);
+  return randomBombs(cells);
 }
 
-ArrayList<Cell> generateBombs(ArrayList<Cell> cells) {
-  float cantCells = xCells*yCells;
-  for (int i = 0; i < cantMines; i++) {
-    int rndCell = int(random(cantCells));
-    while ((cells.get(rndCell) instanceof Bomb)) {
-      rndCell = int(random(cantCells));
+Cell[][] randomBombs(Cell[][] cells) {
+  for(int i = 0; i<cantMines;i++){
+    int rndCol = int(random(xCells-1));
+    int rndRow = int(random(xCells-1));
+    while( cells[rndCol][rndRow].isBomb()){
+      rndCol = int(random(xCells-1));
+      rndRow = int(random(xCells-1));
     }
-    Cell prevCell=cells.get(rndCell);
-    cells.set(rndCell,new Bomb(prevCell.x,prevCell.y));
-  }
-
+    cells[rndCol][rndRow] = new Bomb(rndCol,rndRow);    
+  }  
   return cells;
 }
