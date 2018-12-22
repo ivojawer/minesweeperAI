@@ -3,26 +3,26 @@
 int xCells = 6;
 int yCells = 6;
 int cantMines = 5;
-
+Intelligence ai= new Intelligence();;
 //ArrayList<Cell> cells;
 Cell[][] cells= new Cell[xCells][yCells];
 public boolean lost = false;
 void setup() {
   //noStroke();
   cells = createCells();
-  cells[3][3].uncover();
   background(255);
 }
 
 void settings() {
   int y = int(yCells*cellSize);
-  int w = int(xCells*cellSize); // null pointer exception
+  int w = int(xCells*cellSize); 
   size(y, w);
 }
 
 
 void draw() {
   background(255);
+  ai.step(cells);
   showCells();
 }
 

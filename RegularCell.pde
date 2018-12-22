@@ -11,6 +11,7 @@ public class RegularCell extends Cell{
   @Override
   void uncover(){
     uncovered =true;
+    fillColor = color(100);
   }
   
   @Override
@@ -21,18 +22,24 @@ public class RegularCell extends Cell{
   @Override
   void show(){
     super.show();
-    if(uncovered) showNumber(cantTouchingBombs());
+    if(uncovered) showNumber(cantTouchingBombs());    
   }
   
   void showNumber(int n){
-    textSize(30);
-    fill(#13A740);
-    text(Integer.toString(n),posX(),posY(),posX()+size,posY()+size);
+    textSize(size-10);
+    fill(#13A740);    
+    textAlign(CENTER,CENTER);
+    text(Integer.toString(n),posX(),posY(),size,size);    
   }
   
   int cantTouchingBombs(){
-    
-    return 3;
+    int countBombs = 0;
+    for(int i = max(0,col-1);i<=min(xCells-1,col+1);i++){
+      for(int j = max(0,row -1);j<=min(yCells-1,row+1);j++){        
+        if(cells[i][j] instanceof Bomb) countBombs++;
+      }
+    }
+    return countBombs;
   }
   
 }
