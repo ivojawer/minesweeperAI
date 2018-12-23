@@ -3,7 +3,7 @@ public int cellSize = 30;
 
 
 public abstract class Cell {
-  public int col,row;
+  public int col, row;
   public int size;
   public boolean flagged;
   color fillColor;
@@ -18,9 +18,13 @@ public abstract class Cell {
 
   public Cell() {
   }
-  
-  public float posX() { return col*size;}
-  public float posY() { return row*size;}
+
+  public float posX() { 
+    return col*size;
+  }
+  public float posY() { 
+    return row*size;
+  }
 
   public void show() {
     fill(fillColor);
@@ -28,6 +32,8 @@ public abstract class Cell {
     showFlag();
     // print(this instanceof Bomb);
   }
+
+  public abstract boolean isUncovered();
 
   public void showFlag() {
     if (flagged) {
@@ -37,10 +43,56 @@ public abstract class Cell {
     }
   }
 
+  float probabilityToBeBomb(Cell[][] cells) {
+    return 1;  
+  }
+  
+  int cantTouchingBombs() {
+    int countBombs = 0;
+    //for (int i = max(0, col-1); i<=min(xCells-1, col+1); i++) {
+    //  for (int j = max(0, row -1); j<=min(yCells-1, row+1); j++) {        
+    //    if (cells[i][j] instanceof Bomb) countBombs++;
+    //  }
+    //}
+    //return countBombs;
+    for (Cell myCell : surroundingCells(cells)) {
+      if (myCell instanceof Bomb) countBombs++;
+    }
+    return countBombs;
+  }
+
   public void flag() {   
     flagged=true;
   }
+
+  ArrayList<Cell> surroundingCells(Cell[][] cells) {
+    ArrayList<Cell> surrCells = new ArrayList();
+    for (int i = max(0, col-1); i<=min(xCells-1, col+1); i++) {
+      for (int j = max(0, row -1); j<=min(yCells-1, row+1); j++) {        
+        if(i != col || j != row) surrCells.add(cells[i][j]);
+      }
+    }
+
+    
+    return surrCells;
+  }
   
+  ArrayList<Cell> surroundingUncoveredCells(Cell[][] cells){
+    ArrayList<Cell> surrCovCells = new ArrayList();
+    for(Cell mySurrCell : this.surroundingCells(cells)){
+      if(mySurrCell.isUncovered())surrCovCells.add(mySurrCell);
+    }
+    return surrCovCells;
+  }
+  ArrayList<Cell> surroundingCoveredCells(Cell[][] cells){
+    ArrayList<Cell> surrCovCells = new ArrayList();
+    for(Cell mySurrCell : this.surroundingCells(cells)){
+      if(!mySurrCell.isUncovered())surrCovCells.add(mySurrCell);
+    }
+    return surrCovCells;
+  }
+  
+
   public abstract void uncover();
   public abstract boolean isBomb();
 }
