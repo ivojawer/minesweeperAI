@@ -44,7 +44,19 @@ public abstract class Cell {
   }
 
   float probabilityToBeBomb(Cell[][] cells) {
-    return 1;
+    float maxProb = 0;
+    //for (Cell myCell : this.surroundingUncoveredCells(cells)) {
+    //  float newProb =myCell.cantTouchingBombs()  / myCell.surroundingCoveredCells(cells).size();
+    //  if (maxProb < newProb) maxProb= newProb;
+    //}
+    return maxProb;
+  }
+
+  boolean isFull(Cell[][] cells) {
+    return this.cantTouchingBombs()  == this.surroundingFlaggedCells(cells).size();
+  }
+  boolean isFullOfMines(Cell[][] cells) {
+    return this.cantTouchingBombs()  == this.surroundingCoveredCells(cells).size();
   }
 
   int cantTouchingBombs() {
@@ -71,6 +83,14 @@ public abstract class Cell {
     return surrCells;
   }
 
+  ArrayList<Cell> surroundingFlaggedCells(Cell[][]cells) {
+    ArrayList<Cell> surrFlagCells = new ArrayList();
+    for (Cell mySurrCell : this.surroundingCells(cells)) {
+      if (mySurrCell.flagged)surrFlagCells.add(mySurrCell);
+    }
+    return surrFlagCells;
+  }
+
   ArrayList<Cell> surroundingUncoveredCells(Cell[][] cells) {
     ArrayList<Cell> surrCovCells = new ArrayList();
     for (Cell mySurrCell : this.surroundingCells(cells)) {
@@ -82,6 +102,14 @@ public abstract class Cell {
     ArrayList<Cell> surrCovCells = new ArrayList();
     for (Cell mySurrCell : this.surroundingCells(cells)) {
       if (!mySurrCell.isUncovered())surrCovCells.add(mySurrCell);
+    }
+    return surrCovCells;
+  }
+
+  ArrayList<Cell> surroundingCoveredAndNotFlaggedCells(Cell[][] cells) {
+    ArrayList<Cell> surrCovCells = new ArrayList();
+    for (Cell mySurrCell : this.surroundingCells(cells)) {
+      if (!mySurrCell.isUncovered()  && !mySurrCell.flagged)surrCovCells.add(mySurrCell);
     }
     return surrCovCells;
   }

@@ -47,12 +47,6 @@ public class RegularCell extends Cell {
 
   int cantTouchingBombs() {
     int countBombs = 0;
-    //for (int i = max(0, col-1); i<=min(xCells-1, col+1); i++) {
-    //  for (int j = max(0, row -1); j<=min(yCells-1, row+1); j++) {        
-    //    if (cells[i][j] instanceof Bomb) countBombs++;
-    //  }
-    //}
-    //return countBombs;
     for (Cell myCell : surroundingCells(cells)) {
       if (myCell instanceof Bomb) countBombs++;
     }

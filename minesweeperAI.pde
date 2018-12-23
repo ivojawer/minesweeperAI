@@ -8,26 +8,38 @@ Intelligence ai= new Intelligence();
 //ArrayList<Cell> cells;
 Cell[][] cells= new Cell[xCells][yCells];
 public boolean lost = false;
+float lastReset = 0;
 void setup() {
   //noStroke();
-  frameRate(5);
+  frameRate(2);
   cells = createCells();
   background(255);
 }
 
 void settings() {
+
   int y = int(yCells*cellSize);
   int w = int(xCells*cellSize); 
-  size(y, w);
+  size(w, y);
 }
 
 
 void draw() {
-  background(255);
-  ai.step(cells);
-  showCells();
+  if (!checkWin()) {
+    background(255);
+    ai.step(cells);
+    showCells();
+  } else {
+    print("YOU WIN!!!!  With a time of:  " + (millis()/1000 - lastReset) + "s");
+    lastReset = millis()/1000;
+    cells= createCells();
+  }
 }
 
+
+boolean checkWin() {
+  return xCells*yCells - cantMines == ai.allUncoveredCells(cells).size();
+}
 
 
 void showCells() {

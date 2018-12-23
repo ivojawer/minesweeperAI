@@ -2,14 +2,17 @@ public class Bomb extends Cell {
 
   public Bomb(int _col, int _row) {
     super(_col, _row);
-    fillColor = color(255, 0, 255);//color(180);
+    fillColor = color(180);
   }
 
   @Override
     public void uncover() {
-    //cells = createCells();
-    lost = true;
-    print("You Lose!!!");
+    if (!flagged) {
+      cells = createCells();
+      lost = true;
+      lastReset = millis()/1000;
+      print("You Lose!!!");
+    }
   }
 
   @Override
