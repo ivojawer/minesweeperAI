@@ -3,7 +3,8 @@
 int xCells = 24;
 int yCells = 24;
 int cantMines = 99;
-Intelligence ai= new Intelligence();;
+Intelligence ai= new Intelligence();
+;
 //ArrayList<Cell> cells;
 Cell[][] cells= new Cell[xCells][yCells];
 public boolean lost = false;
@@ -48,14 +49,14 @@ Cell[][] createCells() {
 }
 
 Cell[][] randomBombs(Cell[][] cells) {
-  for(int i = 0; i<cantMines;i++){
+  for (int i = 0; i<cantMines; i++) {
     int rndCol = int(random(xCells));
     int rndRow = int(random(yCells));
-    while( cells[rndCol][rndRow].isBomb()){
+    while ( cells[rndCol][rndRow].isBomb()) {
       rndCol = int(random(xCells));
       rndRow = int(random(yCells));
     }
-    cells[rndCol][rndRow] = new Bomb(rndCol,rndRow);    
+    cells[rndCol][rndRow] = new Bomb(rndCol, rndRow);
   }  
   return cells;
 }

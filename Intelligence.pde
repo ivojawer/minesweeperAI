@@ -12,10 +12,10 @@ public class Intelligence {
 
   Cell lessLikelyToBeBombCell(Cell[][] cells) {
     Cell lessLikelyCell = randomUncoveredCell(cells);
-    for(Cell myCell : allCoveredCells(cells)) {
-        if (myCell.probabilityToBeBomb(cells) <  lessLikelyCell.probabilityToBeBomb(cells)) lessLikelyCell   = myCell;
+    for (Cell myCell : allCoveredCells(cells)) {
+      if (myCell.probabilityToBeBomb(cells) <  lessLikelyCell.probabilityToBeBomb(cells)) lessLikelyCell   = myCell;
     }
-    
+
     return lessLikelyCell;
   }
 
@@ -29,19 +29,16 @@ public class Intelligence {
 
     return cells[rndCol][rndRow];
   }
-  
-  
-  ArrayList<Cell> allCoveredCells(Cell[][] cells){
+
+
+  ArrayList<Cell> allCoveredCells(Cell[][] cells) {
     ArrayList<Cell> coveredCells= new ArrayList();
     for (int i = 0; i < xCells; i++) {
       for (int j = 0; j < yCells; j++) {
         Cell cell = cells[i][j];
-        if(!cell.isUncovered()) coveredCells.add(cell);
+        if (!cell.isUncovered()) coveredCells.add(cell);
       }
     }
     return coveredCells;
   }
-  
-  
-  
 }

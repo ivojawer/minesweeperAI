@@ -14,8 +14,8 @@ public class RegularCell extends Cell {
     fillColor = color(100);
     //0s patch
     if (cantTouchingBombs() == 0) {
-      for(Cell myCell : this.surroundingCells(cells)){
-        if(!myCell.isUncovered())myCell.uncover();
+      for (Cell myCell : this.surroundingCells(cells)) {
+        if (!myCell.isUncovered())myCell.uncover();
       }
     }
   }
