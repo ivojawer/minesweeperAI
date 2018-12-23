@@ -37,6 +37,14 @@ void draw() {
 }
 
 
+
+void keyPressed(){  
+
+  
+}
+
+
+
 boolean checkWin() {
   return xCells*yCells - cantMines == ai.allUncoveredCells(cells).size();
 }

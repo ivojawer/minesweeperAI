@@ -10,7 +10,6 @@ public class Intelligence {
     flagObvious(cells);
     if (!removeFull(cells)) {      
       Cell lltbc = lessLikelyToBeBombCell(cells);
-      //lltbc.flag();
       lltbc.uncover();
     }
   }
@@ -47,7 +46,7 @@ public class Intelligence {
   }
 
   Cell lessLikelyToBeBombCell(Cell[][] cells) {
-    Cell lessLikelyCell = randomUncoveredCell(cells);
+    Cell lessLikelyCell = randomCoveredCell(cells);
     //for (Cell myCell : allCoveredCells(cells)) {
     //  if (myCell.probabilityToBeBomb(cells) <  lessLikelyCell.probabilityToBeBomb(cells)) lessLikelyCell   = myCell;
     //}
@@ -55,10 +54,10 @@ public class Intelligence {
     return lessLikelyCell;
   }
 
-  Cell randomUncoveredCell(Cell[][] cells) {
+  Cell randomCoveredCell(Cell[][] cells) {
     int rndCol = int(random(xCells));
     int rndRow = int(random(yCells));
-    while ( cells[rndCol][rndRow].isUncovered()) {
+    while ( cells[rndCol][rndRow].isUncovered() || cells[rndCol][rndRow].flagged) {
       rndCol = int(random(xCells));
       rndRow = int(random(yCells));
     }
