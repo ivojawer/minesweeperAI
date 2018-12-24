@@ -109,7 +109,7 @@ public abstract class Cell {
   ArrayList<Cell> surroundingCoveredAndNotFlaggedCells(Cell[][] cells) {
     ArrayList<Cell> surrCovCells = new ArrayList();
     for (Cell mySurrCell : this.surroundingCells(cells)) {
-      if (!mySurrCell.isUncovered()  && !mySurrCell.flagged)surrCovCells.add(mySurrCell);
+      if (!mySurrCell.isUncovered())surrCovCells.add(mySurrCell);
     }
     return surrCovCells;
   }
