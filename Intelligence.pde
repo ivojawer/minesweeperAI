@@ -47,7 +47,7 @@ public class Intelligence {
 
   Cell lessLikelyToBeBombCell(Cell[][] cells) {
     Cell lessLikelyCell = randomCoveredCell(cells);
-    //for (Cell myCell : allCoveredCells(cells)) {
+     //for (Cell myCell : allCoveredCells(cells)) {
     //  if (myCell.probabilityToBeBomb(cells) <  lessLikelyCell.probabilityToBeBomb(cells)) lessLikelyCell   = myCell;
     //}
 
