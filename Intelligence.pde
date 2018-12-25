@@ -55,18 +55,10 @@ public class Intelligence {
   }
 
   Cell randomCoveredCell(Cell[][] cells) {
-    int rndCol = int(random(xCells));
-    int rndRow = int(random(yCells));
-<<<<<<< HEAD
-    while ( cells[rndCol][rndRow].isUncovered() || cells[rndCol][rndRow].flagged) {
-=======
-    while (cells[rndCol][rndRow].isUncovered()) {
->>>>>>> 8ad4afabc749929d0e243c52d86e362d12a99b7f
-      rndCol = int(random(xCells));
-      rndRow = int(random(yCells));
-    }
-    return cells[rndCol][rndRow];
-  }
+    ArrayList<Cell> covCells = allCoveredCells(cells);   
+ 
+    return covCells.get(int(random(covCells.size())));
+ }
 
 
   ArrayList<Cell> allCoveredCells(Cell[][] cells) {
@@ -89,5 +81,5 @@ public class Intelligence {
       }
     }
     return uncoveredCells;
-  }
+ }
 }
