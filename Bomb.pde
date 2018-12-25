@@ -17,6 +17,7 @@ public class Bomb extends Cell {
 
   @Override
     boolean isUncovered() { 
+    if(!flagged) return true;
     return false;
   }
 

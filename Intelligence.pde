@@ -57,11 +57,14 @@ public class Intelligence {
   Cell randomCoveredCell(Cell[][] cells) {
     int rndCol = int(random(xCells));
     int rndRow = int(random(yCells));
+<<<<<<< HEAD
     while ( cells[rndCol][rndRow].isUncovered() || cells[rndCol][rndRow].flagged) {
+=======
+    while (cells[rndCol][rndRow].isUncovered()) {
+>>>>>>> 8ad4afabc749929d0e243c52d86e362d12a99b7f
       rndCol = int(random(xCells));
       rndRow = int(random(yCells));
     }
-
     return cells[rndCol][rndRow];
   }
 
@@ -71,7 +74,7 @@ public class Intelligence {
     for (int i = 0; i < xCells; i++) {
       for (int j = 0; j < yCells; j++) {
         Cell cell = cells[i][j];
-        if (!cell.isUncovered()&& !cell.flagged ) coveredCells.add(cell);
+        if (!cell.isUncovered() && !cell.flagged) coveredCells.add(cell);
       }
     }
     return coveredCells;
